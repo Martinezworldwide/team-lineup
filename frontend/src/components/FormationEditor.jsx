@@ -147,6 +147,8 @@ const FormationEditor = () => {
   const [tacticalRoles, setTacticalRoles] = useState({})
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  // Modal state for Tactical Roles popup
+  const [showTacticalModal, setShowTacticalModal] = useState(false)
 
   useEffect(() => {
     loadData()
@@ -337,15 +339,36 @@ const FormationEditor = () => {
                   ))}
                 </div>
               </div>
+              
+              {/* Button to open Tactical Roles modal - shows when players are assigned */}
+              {Object.keys(tacticalRoles).length > 0 && (
+                <div className="tactical-button-container">
+                  <button 
+                    className="open-tactical-btn"
+                    onClick={() => setShowTacticalModal(true)}
+                  >
+                    View Tactical Roles & Instructions
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Isolated full-width container: outside editor flex; scroll is the window */}
-        {Object.keys(tacticalRoles).length > 0 && (
-          <section className="tactical-roles-section" aria-label="Tactical Roles and Instructions">
-            <div className="tactical-roles-panel">
+        {/* MODAL: Tactical Roles popup - opens on button click */}
+        {showTacticalModal && (
+          <div className="tactical-modal-overlay" onClick={() => setShowTacticalModal(false)}>
+            <div className="tactical-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="tactical-modal-header">
                 <h2>Tactical Roles & Instructions</h2>
+                <button 
+                  className="close-modal-btn"
+                  onClick={() => setShowTacticalModal(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="tactical-modal-content">
                 <div className="roles-list">
                   {Object.entries(tacticalRoles).map(([positionId, role]) => {
                     const assignedPlayer = assignments[positionId]
@@ -411,8 +434,9 @@ const FormationEditor = () => {
                     )
                   })}
                 </div>
+              </div>
             </div>
-          </section>
+          </div>
         )}
       </div>
     </DndProvider>

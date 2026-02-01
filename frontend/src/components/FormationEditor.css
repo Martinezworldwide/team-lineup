@@ -261,38 +261,99 @@
   font-style: italic;
 }
 
-/* Tactical Roles: own full-width container outside editor; window scroll only */
-.tactical-roles-section {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  margin-top: 2rem;
-  padding: 2rem;
-  padding-bottom: 3rem;
-  min-height: 0;
-  overflow: visible;
-  background: #f5f5f5;
+/* Button to open Tactical Roles modal */
+.tactical-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
-.tactical-roles-panel {
-  display: block;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  min-height: 0;
+.open-tactical-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.2s ease;
+}
+
+.open-tactical-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* Modal overlay - dark background */
+.tactical-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+/* Modal container */
+.tactical-modal {
   background: white;
-  border: 1px solid #ddd;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 2rem;
-  overflow: visible;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-.tactical-roles-panel h2 {
-  font-size: 1.3rem;
+/* Modal header */
+.tactical-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+  background: #f9f9f9;
+  border-radius: 12px 12px 0 0;
+}
+
+.tactical-modal-header h2 {
+  font-size: 1.4rem;
   color: #333;
-  margin-bottom: 1rem;
+  margin: 0;
+}
+
+.close-modal-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-modal-btn:hover {
+  background: #c0392b;
+}
+
+/* Modal content - scrollable */
+.tactical-modal-content {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .roles-list {
