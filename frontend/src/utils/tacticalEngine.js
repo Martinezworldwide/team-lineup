@@ -4,8 +4,9 @@
 
 // Position to role mapping rules
 // Format: { formation: { positionId: { style: roleData } } }
-const ROLE_MAPPINGS = {
-  '4-4-2': {
+// Built in steps to avoid "Cannot access before initialization" (no self-reference in object literal)
+const ROLE_MAPPINGS = {}
+ROLE_MAPPINGS['4-4-2'] = {
     'gk': {
       'high-press': {
         name: 'Sweeper Keeper',
@@ -638,9 +639,10 @@ const ROLE_MAPPINGS = {
         ]
       }
     }
-  },
-  // 4-3-3 Formation
-  '4-3-3': {
+  }
+// 4-3-3 Formation
+ROLE_MAPPINGS['4-3-3'] = (function () {
+  const F433 = {
     'gk': ROLE_MAPPINGS['4-4-2']['gk'],
     'lb': ROLE_MAPPINGS['4-4-2']['lb'],
     'cb1': ROLE_MAPPINGS['4-4-2']['cb1'],
@@ -760,7 +762,7 @@ const ROLE_MAPPINGS = {
         ]
       }
     },
-    'cm3': ROLE_MAPPINGS['4-3-3']['cm1'],
+    'cm3': null,
     'lw': {
       'high-press': {
         name: 'Pressing Winger',
@@ -875,10 +877,14 @@ const ROLE_MAPPINGS = {
         ]
       }
     },
-    'rw': ROLE_MAPPINGS['4-3-3']['lw']
-  },
-  // 4-2-3-1 Formation
-  '4-2-3-1': {
+    'rw': null
+  }
+  F433.cm3 = F433.cm1
+  F433.rw = F433.lw
+  return F433
+})()
+ROLE_MAPPINGS['4-2-3-1'] = (function () {
+  const F4231 = {
     'gk': ROLE_MAPPINGS['4-4-2']['gk'],
     'lb': ROLE_MAPPINGS['4-4-2']['lb'],
     'cb1': ROLE_MAPPINGS['4-4-2']['cb1'],
@@ -941,7 +947,7 @@ const ROLE_MAPPINGS = {
         ]
       }
     },
-    'cdm2': ROLE_MAPPINGS['4-2-3-1']['cdm1'],
+    'cdm2': null,
     'cam': {
       'high-press': {
         name: 'Pressing Number 10',
@@ -1002,9 +1008,13 @@ const ROLE_MAPPINGS = {
     'lw': ROLE_MAPPINGS['4-3-3']['lw'],
     'rw': ROLE_MAPPINGS['4-3-3']['rw'],
     'st': ROLE_MAPPINGS['4-3-3']['st']
-  },
-  // 3-5-2 Formation
-  '3-5-2': {
+  }
+  F4231.cdm2 = F4231.cdm1
+  return F4231
+})()
+// 3-5-2 Formation
+ROLE_MAPPINGS['3-5-2'] = (function () {
+  const F352 = {
     'gk': ROLE_MAPPINGS['4-4-2']['gk'],
     'cb1': {
       'high-press': {
@@ -1063,8 +1073,8 @@ const ROLE_MAPPINGS = {
         ]
       }
     },
-    'cb2': ROLE_MAPPINGS['3-5-2']['cb1'],
-    'cb3': ROLE_MAPPINGS['3-5-2']['cb1'],
+    'cb2': null,
+    'cb3': null,
     'lm': {
       'high-press': {
         name: 'Pressing Wing-Back',
@@ -1125,11 +1135,15 @@ const ROLE_MAPPINGS = {
     'cm1': ROLE_MAPPINGS['4-3-3']['cm1'],
     'cm2': ROLE_MAPPINGS['4-3-3']['cm2'],
     'cm3': ROLE_MAPPINGS['4-3-3']['cm1'],
-    'rm': ROLE_MAPPINGS['3-5-2']['lm'],
+    'rm': null,
     'st1': ROLE_MAPPINGS['4-4-2']['st1'],
     'st2': ROLE_MAPPINGS['4-4-2']['st2']
   }
-}
+  F352.cb2 = F352.cb1
+  F352.cb3 = F352.cb1
+  F352.rm = F352.lm
+  return F352
+})()
 
 /**
  * Interpret roles for assigned positions based on formation and tactical style

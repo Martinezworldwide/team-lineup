@@ -4,6 +4,7 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useAuth } from '../context/AuthContext'
 import { tacticalEngine } from '../utils/tacticalEngine'
+import { getPlayerStylesForRole } from '../data/playerStyleRecommendations'
 import './FormationEditor.css'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
@@ -351,7 +352,7 @@ const FormationEditor = () => {
                         <p className="role-description">{role.description}</p>
                         {role.youtubeLinks && role.youtubeLinks.length > 0 && (
                           <div className="youtube-links">
-                            <h4>Educational Videos:</h4>
+                            <h4>Educational Videos</h4>
                             <ul>
                               {role.youtubeLinks.map((link, idx) => (
                                 <li key={idx}>
@@ -363,13 +364,41 @@ const FormationEditor = () => {
                                     {link.title}
                                   </a>
                                   {link.focus && (
-                                    <span className="focus-note"> - {link.focus}</span>
+                                    <span className="focus-note"> — {link.focus}</span>
                                   )}
                                 </li>
                               ))}
                             </ul>
                           </div>
                         )}
+                        {(() => {
+                          const playerStyles = getPlayerStylesForRole(positionId, role.name, selectedStyle)
+                          if (playerStyles.length === 0) return null
+                          return (
+                            <div className="player-style-recommendations">
+                              <h4>Play like these players</h4>
+                              <p className="player-style-intro">Watch highlights to replicate their style for this role.</p>
+                              <ul className="player-style-list">
+                                {playerStyles.map((p, idx) => (
+                                  <li key={idx} className="player-style-item">
+                                    <a
+                                      href={p.youtubeUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="player-style-link"
+                                    >
+                                      <span className="player-name">{p.playerName}</span>
+                                      <span className="player-video-title">{p.videoTitle}</span>
+                                    </a>
+                                    {p.focus && (
+                                      <span className="player-focus">{p.focus}</span>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )
+                        })()}
                       </div>
                     )
                   })}

@@ -315,3 +315,73 @@
   font-size: 0.8rem;
   font-style: italic;
 }
+
+/* Player-style recommendations: "Play like these players" */
+.player-style-recommendations {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+}
+
+.player-style-recommendations h4 {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.player-style-intro {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.player-style-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player-style-item {
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.player-style-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.player-style-link:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
+.player-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.player-style-link:hover .player-name {
+  color: #667eea;
+}
+
+.player-video-title {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #666;
+}
+
+.player-focus {
+  font-size: 0.75rem;
+  color: #888;
+  font-style: italic;
+  padding-left: 0.25rem;
+}

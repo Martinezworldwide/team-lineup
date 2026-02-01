@@ -17,10 +17,13 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : <Navigate to="/login" />
 }
 
+// Base path for GitHub Pages (e.g. /team-lineup) or empty for local dev
+const basename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '')
+
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route 
