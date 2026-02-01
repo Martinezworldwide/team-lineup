@@ -32,6 +32,18 @@ body {
   overflow: visible;
 }
 
+/* Force document as scroll container when hosted (e.g. GitHub Pages) so layout matches local */
+html.team-lineup-root,
+html.team-lineup-root body,
+html.team-lineup-root #root {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow: visible !important;
+}
+html.team-lineup-root {
+  overflow-y: scroll !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
