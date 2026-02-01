@@ -1,21 +1,25 @@
-/* Page wrapper: block only, no flex/height; window is the scroll container */
+/* Page wrapper: MUST allow document scroll - no fixed height, no overflow traps */
 .formation-editor-page {
-  display: block;
+  display: block !important;
   width: 100%;
-  min-height: 100vh;
-  height: auto;
-  overflow: visible;
+  min-height: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
   background: #f5f5f5;
 }
 
 /* Editor block: header + sidebar + pitch (tactical section is sibling, not inside) */
 .formation-editor {
-  display: block;
+  display: block !important;
   width: 100%;
-  height: auto;
-  min-height: 0;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
   background: #f5f5f5;
-  overflow: visible;
   padding-bottom: 0;
 }
 
@@ -70,8 +74,11 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
-  height: auto;
-  min-height: 0;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
 }
 
 /* Sidebar: no max-height so it grows with content and page scrolls; overflow only if we add max-height later */
