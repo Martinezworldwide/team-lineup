@@ -4,10 +4,30 @@ You can deploy the frontend to GitHub Pages **without using GitHub Actions**. He
 
 ## Method 1: Manual Build & Deploy (Recommended - Completely Free)
 
-### Step 1: Build the Frontend Locally
+### Step 1: Navigate to Your Project
+
+**Option A: If you cloned the repository**
+```bash
+cd team-lineup
+cd frontend
+```
+
+**Option B: If you're in the original project folder**
+```bash
+cd "/Users/martinezworldwide/Desktop/Zero Architecture Team Lineup Board/frontend"
+```
+
+**Option C: If you're starting fresh**
+```bash
+# Clone the repository first
+git clone https://github.com/Martinezworldwide/team-lineup.git
+cd team-lineup
+cd frontend
+```
+
+### Step 2: Build the Frontend
 
 ```bash
-cd frontend
 npm install
 npm run build
 ```
@@ -18,24 +38,28 @@ This creates a `dist/` folder with the built files.
 
 **Option A: Using `gh-pages` package (Easiest)**
 
-1. Install gh-pages:
+1. Make sure you're in the frontend directory:
+   ```bash
+   # If you cloned the repo
+   cd team-lineup/frontend
+   
+   # Or if in original project
+   cd "/Users/martinezworldwide/Desktop/Zero Architecture Team Lineup Board/frontend"
+   ```
+
+2. Install gh-pages:
    ```bash
    npm install --save-dev gh-pages
    ```
 
-2. Add to `package.json`:
-   ```json
-   {
-     "scripts": {
-       "deploy": "npm run build && gh-pages -d dist"
-     }
-   }
-   ```
-
-3. Deploy:
+3. The deploy script is already in `package.json`, so just run:
    ```bash
    npm run deploy
    ```
+
+   This will:
+   - Build the frontend (`npm run build`)
+   - Deploy to GitHub Pages (`gh-pages -d dist`)
 
 **Option B: Manual Git Push**
 
@@ -89,8 +113,43 @@ If you want to avoid building entirely, you can:
 ## Update Process
 
 When you make changes:
-1. Build: `cd frontend && npm run build`
-2. Deploy using your chosen method
-3. Done!
+
+1. **Navigate to frontend directory:**
+   ```bash
+   # If you cloned the repo
+   cd team-lineup/frontend
+   
+   # Or if in original project
+   cd "/Users/martinezworldwide/Desktop/Zero Architecture Team Lineup Board/frontend"
+   ```
+
+2. **Build and deploy:**
+   ```bash
+   npm run deploy
+   ```
+
+3. Done! Your changes are live on GitHub Pages.
 
 No GitHub Actions needed!
+
+## Full Example Workflow
+
+```bash
+# 1. Clone the repository (first time only)
+git clone https://github.com/Martinezworldwide/team-lineup.git
+cd team-lineup
+
+# 2. Go into frontend folder
+cd frontend
+
+# 3. Install dependencies (first time only)
+npm install
+
+# 4. Install gh-pages (first time only)
+npm install --save-dev gh-pages
+
+# 5. Make your code changes...
+
+# 6. Deploy (every time you make changes)
+npm run deploy
+```
