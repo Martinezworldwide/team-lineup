@@ -262,81 +262,86 @@ const FormationEditor = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="formation-editor">
-        <header className="editor-header">
-          <button onClick={() => navigate('/dashboard')} className="back-btn">
-            ← Back
-          </button>
-          <h1>Formation Editor</h1>
-          <button onClick={handleSave} disabled={saving} className="save-btn">
-            {saving ? 'Saving...' : 'Save Lineup'}
-          </button>
-        </header>
+      {/* Page wrapper: block layout only; no flex/height trap so window scroll works */}
+      <div className="formation-editor-page">
+        {/* Editor block: header + sidebar + pitch (tactical section is sibling, not inside) */}
+        <div className="formation-editor">
+          <header className="editor-header">
+            <button onClick={() => navigate('/dashboard')} className="back-btn">
+              ← Back
+            </button>
+            <h1>Formation Editor</h1>
+            <button onClick={handleSave} disabled={saving} className="save-btn">
+              {saving ? 'Saving...' : 'Save Lineup'}
+            </button>
+          </header>
 
-        <div className="editor-content">
-          <div className="editor-sidebar">
-            <section className="sidebar-section">
-              <h2>Formation</h2>
-              <select
-                value={selectedFormation}
-                onChange={(e) => {
-                  setSelectedFormation(e.target.value)
-                  setAssignments({}) // Clear assignments on formation change
-                }}
-                className="formation-select"
-              >
-                {Object.keys(FORMATIONS).map(f => (
-                  <option key={f} value={f}>{f}</option>
-                ))}
-              </select>
-            </section>
+          <div className="editor-content">
+            <div className="editor-sidebar">
+              <section className="sidebar-section">
+                <h2>Formation</h2>
+                <select
+                  value={selectedFormation}
+                  onChange={(e) => {
+                    setSelectedFormation(e.target.value)
+                    setAssignments({}) // Clear assignments on formation change
+                  }}
+                  className="formation-select"
+                >
+                  {Object.keys(FORMATIONS).map(f => (
+                    <option key={f} value={f}>{f}</option>
+                  ))}
+                </select>
+              </section>
 
-            <section className="sidebar-section">
-              <h2>Tactical Style</h2>
-              <div className="style-buttons">
-                {TACTICAL_STYLES.map(style => (
-                  <button
-                    key={style.id}
-                    className={`style-btn ${selectedStyle === style.id ? 'active' : ''}`}
-                    onClick={() => setSelectedStyle(style.id)}
-                  >
-                    {style.label}
-                  </button>
-                ))}
-              </div>
-            </section>
+              <section className="sidebar-section">
+                <h2>Tactical Style</h2>
+                <div className="style-buttons">
+                  {TACTICAL_STYLES.map(style => (
+                    <button
+                      key={style.id}
+                      className={`style-btn ${selectedStyle === style.id ? 'active' : ''}`}
+                      onClick={() => setSelectedStyle(style.id)}
+                    >
+                      {style.label}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
-            <section className="sidebar-section">
-              <h2>Available Players</h2>
-              <div className="players-list">
-                {availablePlayers.length === 0 ? (
-                  <p className="empty-message">All players assigned</p>
-                ) : (
-                  availablePlayers.map(player => (
-                    <DraggablePlayer key={player.id} player={player} />
-                  ))
-                )}
-              </div>
-            </section>
-          </div>
+              <section className="sidebar-section">
+                <h2>Available Players</h2>
+                <div className="players-list">
+                  {availablePlayers.length === 0 ? (
+                    <p className="empty-message">All players assigned</p>
+                  ) : (
+                    availablePlayers.map(player => (
+                      <DraggablePlayer key={player.id} player={player} />
+                    ))
+                  )}
+                </div>
+              </section>
+            </div>
 
-          <div className="editor-main">
-            <div className="pitch-container">
-              <div className="pitch">
-                {positions.map(position => (
-                  <PositionSlot
-                    key={position.id}
-                    position={position}
-                    assignedPlayer={assignments[position.id]}
-                    onDrop={handleDrop}
-                    onRemove={handleRemove}
-                  />
-                ))}
+            <div className="editor-main">
+              <div className="pitch-container">
+                <div className="pitch">
+                  {positions.map(position => (
+                    <PositionSlot
+                      key={position.id}
+                      position={position}
+                      assignedPlayer={assignments[position.id]}
+                      onDrop={handleDrop}
+                      onRemove={handleRemove}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Isolated full-width container: outside editor flex; scroll is the window */}
         {Object.keys(tacticalRoles).length > 0 && (
           <section className="tactical-roles-section" aria-label="Tactical Roles and Instructions">
             <div className="tactical-roles-panel">
@@ -413,5 +418,6 @@ const FormationEditor = () => {
     </DndProvider>
   )
 }
+
 
 export default FormationEditor

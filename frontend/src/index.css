@@ -4,17 +4,19 @@
   box-sizing: border-box;
 }
 
-/* Document must be the scroll container: no overflow hidden, no fixed height on root/body */
+/* Document is the only scroll container: no fixed height, no overflow hidden on root/body */
 html {
   overflow-y: scroll;
+  overflow-x: hidden;
   min-height: 100%;
   height: auto;
 }
 
 body {
+  display: block;
   min-height: 100%;
   height: auto;
-  overflow: visible; /* Never clip; let document scroll */
+  overflow: visible;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -24,9 +26,10 @@ body {
 }
 
 #root {
+  display: block;
   min-height: 100%;
   height: auto;
-  overflow: visible; /* Let content extend so page scrolls; no inner scroll trap */
+  overflow: visible;
 }
 
 code {

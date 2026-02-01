@@ -1,11 +1,22 @@
-/* Page container: must grow with content so document scrolls to Tactical Roles section */
-.formation-editor {
+/* Page wrapper: block only, no flex/height; window is the scroll container */
+.formation-editor-page {
   display: block;
+  width: 100%;
   min-height: 100vh;
   height: auto;
+  overflow: visible;
+  background: #f5f5f5;
+}
+
+/* Editor block: header + sidebar + pitch (tactical section is sibling, not inside) */
+.formation-editor {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
   background: #f5f5f5;
   overflow: visible;
-  padding-bottom: 2rem;
+  padding-bottom: 0;
 }
 
 .editor-header {
@@ -243,17 +254,24 @@
   font-style: italic;
 }
 
-/* Tactical Roles: full-width section below the pitch; in document flow so page scroll reaches it */
+/* Tactical Roles: own full-width container outside editor; window scroll only */
 .tactical-roles-section {
+  display: block;
   width: 100%;
-  margin-top: 2rem;
-  padding: 0 2rem 2rem;
   box-sizing: border-box;
+  margin: 0;
+  margin-top: 2rem;
+  padding: 2rem;
+  padding-bottom: 3rem;
   min-height: 0;
+  overflow: visible;
+  background: #f5f5f5;
 }
 
 .tactical-roles-panel {
+  display: block;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   min-height: 0;
   background: white;
@@ -261,7 +279,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 2rem;
-  overflow-y: visible; /* Panel grows with content; page scroll handles vertical reach */
+  overflow: visible;
 }
 
 .tactical-roles-panel h2 {
