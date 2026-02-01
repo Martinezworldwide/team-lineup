@@ -1,5 +1,8 @@
+/* Page container: must grow with content so document scrolls to Tactical Roles section */
 .formation-editor {
+  display: block;
   min-height: 100vh;
+  height: auto;
   background: #f5f5f5;
   overflow: visible;
   padding-bottom: 2rem;
@@ -51,19 +54,23 @@
   cursor: not-allowed;
 }
 
+/* Flex row for sidebar + pitch only; no fixed height so page can scroll to content below */
 .editor-content {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
-  /* No fixed height - field area only; tactical section is below */
+  height: auto;
+  min-height: 0;
 }
 
+/* Sidebar: no max-height so it grows with content and page scrolls; overflow only if we add max-height later */
 .editor-sidebar {
   width: 300px;
+  flex-shrink: 0;
   background: white;
   border-right: 1px solid #ddd;
   padding: 1.5rem;
-  overflow-y: auto;
+  overflow-y: visible;
 }
 
 .sidebar-section {
@@ -156,12 +163,13 @@
   padding: 1rem;
 }
 
+/* Main area: size to content (pitch), do not take fixed remaining space so page scrolls */
 .editor-main {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  /* Grows with content - pitch and tactical panel are separate blocks; page scrolls */
+  height: auto;
 }
 
 .pitch-container {
@@ -235,23 +243,25 @@
   font-style: italic;
 }
 
-/* Tactical Roles: its own full-width section below the field - scroll down to see it */
+/* Tactical Roles: full-width section below the pitch; in document flow so page scroll reaches it */
 .tactical-roles-section {
   width: 100%;
   margin-top: 2rem;
   padding: 0 2rem 2rem;
   box-sizing: border-box;
+  min-height: 0;
 }
 
 .tactical-roles-panel {
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 0;
   background: white;
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 2rem;
-  /* Clearly its own box - not stuck to the field */
+  overflow-y: visible; /* Panel grows with content; page scroll handles vertical reach */
 }
 
 .tactical-roles-panel h2 {
