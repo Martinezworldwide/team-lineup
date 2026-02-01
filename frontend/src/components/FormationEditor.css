@@ -1,6 +1,8 @@
 .formation-editor {
   min-height: 100vh;
   background: #f5f5f5;
+  overflow: visible;
+  padding-bottom: 2rem;
 }
 
 .editor-header {
@@ -51,7 +53,9 @@
 
 .editor-content {
   display: flex;
-  height: calc(100vh - 80px);
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  /* No fixed height - field area only; tactical section is below */
 }
 
 .editor-sidebar {
@@ -156,15 +160,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  min-width: 0;
+  /* Grows with content - pitch and tactical panel are separate blocks; page scrolls */
 }
 
 .pitch-container {
-  flex: 1;
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .pitch {
@@ -230,12 +235,23 @@
   font-style: italic;
 }
 
+/* Tactical Roles: its own full-width section below the field - scroll down to see it */
+.tactical-roles-section {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0 2rem 2rem;
+  box-sizing: border-box;
+}
+
 .tactical-roles-panel {
+  max-width: 1200px;
+  margin: 0 auto;
   background: white;
-  border-top: 1px solid #ddd;
-  padding: 1.5rem 2rem;
-  max-height: 400px;
-  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  /* Clearly its own box - not stuck to the field */
 }
 
 .tactical-roles-panel h2 {

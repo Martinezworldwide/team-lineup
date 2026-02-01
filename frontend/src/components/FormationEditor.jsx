@@ -334,9 +334,12 @@ const FormationEditor = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
 
-            {Object.keys(tacticalRoles).length > 0 && (
-              <div className="tactical-roles-panel">
+        {Object.keys(tacticalRoles).length > 0 && (
+          <section className="tactical-roles-section" aria-label="Tactical Roles and Instructions">
+            <div className="tactical-roles-panel">
                 <h2>Tactical Roles & Instructions</h2>
                 <div className="roles-list">
                   {Object.entries(tacticalRoles).map(([positionId, role]) => {
@@ -403,10 +406,9 @@ const FormationEditor = () => {
                     )
                   })}
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
+            </div>
+          </section>
+        )}
       </div>
     </DndProvider>
   )
